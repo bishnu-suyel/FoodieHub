@@ -15,7 +15,7 @@ A simple recipe application that fetches recipes from a Strapi backend and displ
 ## Installation:
 1. Clone the repository
     ```bash
-    git clone https://github.com/your-username/recipe-app.git
+    git clone https://github.com/bishnu-suyel/FoodieHub.git
     ```
 2. Install dependencies
     ```bash
