@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "receipes",
+  "info": {
+    "singularName": "receipe",
+    "pluralName": "receipes",
+    "displayName": "Receipe"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "blocks"
+    },
+    "Ingredients": {
+      "type": "blocks"
+    },
+    "Instructions": {
+      "type": "blocks"
+    },
+    "Cooking_Time": {
+      "type": "integer"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

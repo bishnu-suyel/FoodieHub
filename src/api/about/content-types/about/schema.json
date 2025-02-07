@@ -17,7 +17,28 @@
     },
     "blocks": {
       "type": "dynamiczone",
-      "components": ["shared.media", "shared.quote", "shared.rich-text", "shared.slider"]
+      "components": [
+        "shared.media",
+        "shared.quote",
+        "shared.rich-text",
+        "shared.slider"
+      ]
+    },
+    "receipes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::receipe.receipe"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "Rating": {
+      "type": "integer"
+    },
+    "Comment": {
+      "type": "string"
     }
   }
 }
