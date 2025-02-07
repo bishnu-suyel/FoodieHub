@@ -10,7 +10,7 @@ A simple recipe application that fetches recipes from a Strapi backend and displ
 ## Tech Stack:
 - **Frontend:** React.js
 - **Backend:** Strapi (Headless CMS)
-- **Styling:** CSS
+- **Styling:** CSS, Bootstrap
 
 ## Installation:
 1. Clone the repository
@@ -34,6 +34,11 @@ A simple recipe application that fetches recipes from a Strapi backend and displ
     ```bash
     cd frontend
     npm install
+    ```
+
+    c. Install Bootstrap:
+    ```bash
+    npm install bootstrap
     ```
 
     - Run the React app
