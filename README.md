@@ -18,19 +18,34 @@ A simple recipe application that fetches recipes from a Strapi backend and displ
     git clone https://github.com/bishnu-suyel/FoodieHub.git
     ```
 2. Install dependencies
+
+    a. Install backend (Strapi):
     ```bash
-    cd FoodieHub/frontend
+    cd FoodieHub
     npm install
     ```
-3. Run the React app
+    - Start the Strapi development server:
+    ```bash
+    npm run develop
+    ```
+    - Visit [http://localhost:1337/admin](http://localhost:1337/admin) to access the Strapi admin panel and manage content.
+
+    b. Install frontend (React):
+    ```bash
+    cd frontend
+    npm install
+    ```
+
+    - Run the React app
     ```bash
     npm start
     ```
-    The app will be available at [http://localhost:3000](http://localhost:3000).
+    - The app will be available at [http://localhost:3000](http://localhost:3000).
 
-## Strapi Setup:
-- Make sure Strapi is set up and running at [http://localhost:1337](http://localhost:1337).
-- Configure your Strapi backend to include recipe data.
+3. Make sure both servers are running:
+
+- Strapi should be running on [http://localhost:1337](http://localhost:1337) (backend).
+- React should be running on [http://localhost:3000](http://localhost:3000) (frontend).
 
 ## License:
 MIT License
