@@ -1,13 +1,14 @@
-import './App.css';
-import Recipes from './components/Recipes'; // Ensure the component name is correct
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Recipes from './components/Recipes'; // Ensure the path is correct
+import RecipeDetail from './components/RecipeDetail'; // Ensure the path is correct
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Recipes />} />
-        <Route path="/recipes" element={<Recipes />} /> {/* Corrected from "/receipes" to "/recipes" */}
+        <Route path="/recipes/:documentId" element={<RecipeDetail />} /> {/* Updated path */}
       </Routes>
     </Router>
   );
