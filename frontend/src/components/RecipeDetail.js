@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RecipeDetail = () => {
-  const { documentId } = useParams(); // Get the documentId from the URL
+  const { documentId } = useParams(); 
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,8 +18,8 @@ const RecipeDetail = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:1337/api/receipes?filters[documentId][$eq]=${documentId}&populate=*`); // Fetch by documentId
-      console.log('API Response:', response.data); // Debugging
+      const response = await api.get(`/receipes?filters[documentId][$eq]=${documentId}&populate=*`); // Fetch by documentId
+      console.log('API Response:', response.data); 
       if (!response.data.data || response.data.data.length === 0) {
         throw new Error('Recipe not found');
       }
