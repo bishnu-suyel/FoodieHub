@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import api from '../api'; 
+import { useParams, useNavigate } from 'react-router-dom';
+import api from '../api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RecipeDetail = () => {
   const { documentId } = useParams(); 
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch the specific recipe by documentId
   const fetchRecipe = async () => {
     if (!documentId) {
       setError('Invalid document ID');
@@ -18,15 +18,13 @@ const RecipeDetail = () => {
     }
 
     try {
-      const response = await api.get(`/receipes?filters[documentId][$eq]=${documentId}&populate=*`); // Fetch by documentId
-      console.log('API Response:', response.data); 
+      const response = await api.get(`/receipes?filters[documentId][$eq]=${documentId}&populate=*`);
       if (!response.data.data || response.data.data.length === 0) {
         throw new Error('Recipe not found');
       }
       setRecipe(response.data.data[0]);
       setError(null);
     } catch (error) {
-      console.error('Error fetching recipe:', error);
       setError('Recipe not found or error fetching recipe');
     } finally {
       setLoading(false);
@@ -35,7 +33,7 @@ const RecipeDetail = () => {
 
   useEffect(() => {
     fetchRecipe();
-  }, [documentId]); // Refetch when documentId changes
+  }, [documentId]);
 
   if (loading) {
     return <p className="text-center">Loading recipe...</p>;
@@ -47,12 +45,18 @@ const RecipeDetail = () => {
 
   return (
     <div className="container mt-4">
+      <button
+        className="btn btn-primary position-fixed top-0 end-0 m-3"
+        style={{ zIndex: 1050 }}
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </button>
+      
+      <h2 className="card-title text-center mt-5">{recipe.Title || 'No Title'}</h2>
       {recipe ? (
         <div className="card mb-4 shadow-sm">
           <div className="card-body text-center">
-            <h2 className="card-title">{recipe.Title || 'No Title'}</h2>
-
-            {/* Display Image */}
             {recipe.Image && recipe.Image.length > 0 && (
               <img
                 src={`http://localhost:1337${recipe.Image[0].url}`}
