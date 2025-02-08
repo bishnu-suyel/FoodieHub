@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import axios from 'axios';
+import { Link } from 'react-router-dom'; 
+import api from '../api'; 
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get('http://localhost:1337/api/receipes?populate=*');
+      const response = await api.get('/receipes?populate=*');
       setRecipes(response.data.data);
     } catch (error) {
       setError('Error fetching recipes');
@@ -20,11 +21,25 @@ const Recipes = () => {
     fetchRecipes();
   }, []);
 
+  // Filter recipes based on search query
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.Title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="container">
+    <div className="container mt-5">
+      <div className="mb-4 d-flex justify-content-center">
+        <input
+          type="text"
+          className="form-control w-50"
+          placeholder="Search recipes..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
       {error && <p className="text-danger">{error}</p>}
-      {recipes.length > 0 ? (
-        recipes.map((recipe) => (
+      {filteredRecipes.length > 0 ? (
+        filteredRecipes.map((recipe) => (
           <div key={recipe.id} className="card my-3">
             <div className="card-body">
               <h2 className="card-title">{recipe.Title}</h2>
@@ -36,7 +51,7 @@ const Recipes = () => {
           </div>
         ))
       ) : (
-        <p>Loading recipes...</p>
+        <p>No recipes found</p>
       )}
     </div>
   );
